@@ -1,0 +1,24 @@
+// unit-converter.component.html
+<div class="converter-container">
+  <label>Commodity:</label>
+  <select [(ngModel)]="selectedCommodity">
+    <option *ngFor="let c of commodities" [ngValue]="c">{{c.name}}</option>
+  </select>
+
+  <label>De:</label>
+  <select [(ngModel)]="fromUnit">
+    <option *ngFor="let u of selectedCommodity?.units" [ngValue]="u">{{u.name}}</option>
+  </select>
+
+  <label>Para:</label>
+  <select [(ngModel)]="toUnit">
+    <option *ngFor="let u of selectedCommodity?.units" [ngValue]="u">{{u.name}}</option>
+  </select>
+
+  <label>Valor:</label>
+  <input type="number" [(ngModel)]="inputValue">
+
+  <div class="result" *ngIf="fromUnit && toUnit">
+    Resultado: {{ convert(inputValue, fromUnit.toKgFactor, toUnit.toKgFactor) | number:'1.2-2' }} {{toUnit.symbol}}
+  </div>
+</div>
